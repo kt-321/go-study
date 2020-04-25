@@ -1,5 +1,11 @@
 package router
 
+import (
+	"awesomeProject/controller"
+
+	"github.com/gin-gonic/gin"
+)
+
 //"awesomeProject/controller"
 //"log"
 //"net/http"
@@ -10,9 +16,9 @@ package router
  */
 //ginを使うのか
 //main.goから呼んで使っている
-func GetRouter() {
-	//func GetRouter() *gin.Engine {
-	//	r := gin.Default()
+//func GetRouter() {
+func GetRouter() *gin.Engine {
+	r := gin.Default()
 
 	//static
 	//r.Static("/js", "./public/js")
@@ -29,14 +35,15 @@ func GetRouter() {
 	//r.HandleFunc("/api/tracks", controller.GetPlayList).Methods("GET")
 
 	//r.GET("/", controller.Index)
-	//r.GET("/login", controller.Login)
-	//r.GET("/oauth", controller.OAuth)
-	//r.GET("/api/tracks", controller.GetPlayList)
+	r.GET("/login", controller.Login)
+	r.GET("/oauth", controller.OAuth)
+	r.GET("/api/tracks", controller.GetPlayList)
+	r.GET("/api/artist", controller.GetArtist)
 
 	//追加した
 	//if err := http.ListenAndServe(":8080", r); err != nil {
 	//	log.Fatal(err)
 	//}
 	//
-	//return r
+	return r
 }

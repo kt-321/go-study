@@ -2,7 +2,7 @@ package main
 
 import (
 	"awesomeProject/config"
-	"awesomeProject/controller"
+	"awesomeProject/router"
 
 	//"time"
 
@@ -429,20 +429,24 @@ func main() {
 	db.Create(&User{Name: "test", Email: "test@example.com", Age: 20, Password: "golang"})
 
 	//まだ試してない
-	//r := router.GetRouter()
+	r := router.GetRouter()
 	//r.Run(":3000")
+	r.Run(":8080")
 
 	//router.goは一旦コメントアウト
-	r := mux.NewRouter()
+	//r := mux.NewRouter()
 
 	//r.HandleFunc("/", controller.Index).Methods("GET")
 	//r.HandleFunc("/login", controller.Login).Methods("GET")
-	r.HandleFunc("/oauth", controller.OAuth).Methods("GET")
-	r.HandleFunc("/api/tracks", controller.GetPlayList).Methods("GET")
+	//r.HandleFunc("/oauth", controller.OAuth).Methods("GET")
+	//r.HandleFunc("/api/tracks", controller.GetPlayList).Methods("GET")
+	//
+	//r.HandleFunc("/song", CreateSongHandler).Methods("POST")
+	//r.HandleFunc("/signup", SignUpHandler).Methods("POST")
+	//r.HandleFunc("/login", LoginHandler).Methods("POST")
 
-	r.HandleFunc("/song", CreateSongHandler).Methods("POST")
-	r.HandleFunc("/signup", SignUpHandler).Methods("POST")
-	r.HandleFunc("/login", LoginHandler).Methods("POST")
+	//一旦参考サイトのもので試す
+	//r.HandleFunc("/login", controller.Login).Methods("GET")
 
 	//追加した
 	if err := http.ListenAndServe(":8080", r); err != nil {
@@ -555,9 +559,9 @@ func main() {
 	//r.HandleFunc("/event/{id}", UpdateEventHandler).Methods("PUT")
 
 	//sql-migrateでマイグレーション後に成功
-	r.HandleFunc("/song", CreateSongHandler).Methods("POST")
-
-	r.HandleFunc("/signup", SignUpHandler).Methods("POST")
+	//r.HandleFunc("/song", CreateSongHandler).Methods("POST")
+	//
+	//r.HandleFunc("/signup", SignUpHandler).Methods("POST")
 	//r.HandleFunc("/login", LoginHandler).Methods("POST")
 	//①どちらでもできてそう
 	//srv := &http.Server{
