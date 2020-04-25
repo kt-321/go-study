@@ -7,8 +7,6 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	//owm "github.com/briandowns/openweathermap"
-	//"github.com/konojunya/musi/model"
 )
 
 //この記述自体は、位置情報→天気→Spoitfyのよう
@@ -168,12 +166,60 @@ func SearchMusicArtists(token string) (*model.Response, error) {
 	json.Unmarshal(b, &artists)
 
 	response := &model.Response{
-		//CityName: w.Name,
 		Artists: artists,
-		//Weather:  w.Weather[0].Main,
 	}
 
 	log.Println("response:", response)
 
 	return response, nil
 }
+
+//func GetTracks(token string, title string) (*model.Response, error) {
+//
+//	values := url.Values{}
+//
+//	values.Add("type", "track")
+//	values.Add("q", title)
+//	values.Add("market", "JP")
+//	values.Add("limit", "10")
+//
+//	log.Println("values:", values)
+//
+//	log.Println("title:", title)
+//
+//	req, _ := http.NewRequest("GET", "https://api.spotify.com/v1/search", nil)
+//	req.URL.RawQuery = values.Encode()
+//	req.Header.Set("Authorization", "Bearer "+token)
+//
+//	client := &http.Client{}
+//	log.Println("req:", req)
+//
+//	resp, err := client.Do(req)
+//	if err != nil {
+//		log.Println("client.Do失敗")
+//		return nil, err
+//	}
+//	log.Println("resp:", resp)
+//
+//	defer resp.Body.Close()
+//
+//	b, err := ioutil.ReadAll(resp.Body)
+//	if err != nil {
+//		log.Println("err:", err)
+//		return nil, err
+//	}
+//	//log.Println("b:", b)
+//
+//	var tracks model.Tracks
+//	log.Print("model.Tracks:", tracks)
+//
+//	json.Unmarshal(b, &tracks)
+//
+//	response := &model.Response{
+//		Tracks: tracks,
+//	}
+//
+//	log.Println("response:", response)
+//
+//	return response, nil
+//}

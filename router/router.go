@@ -37,8 +37,9 @@ func GetRouter() *gin.Engine {
 	//r.GET("/", controller.Index)
 	r.GET("/login", controller.Login)
 	r.GET("/oauth", controller.OAuth)
-	r.GET("/api/tracks", controller.GetPlayList)
+	//r.GET("/api/playlist", controller.GetPlayList)
 	r.GET("/api/artist", controller.GetArtist)
+	//r.GET("/api/tracks", controller.GetTracks)
 
 	//追加した
 	//if err := http.ListenAndServe(":8080", r); err != nil {

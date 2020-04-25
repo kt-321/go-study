@@ -43,9 +43,7 @@ func OAuth(c *gin.Context) {
 	fmt.Println(code)
 
 	config = oauth2.Config{
-		//取れてるはず
-		ClientID: os.Getenv("client_id"),
-		//取れてるはず
+		ClientID:     os.Getenv("client_id"),
 		ClientSecret: os.Getenv("client_secret"),
 		Endpoint: oauth2.Endpoint{
 			AuthURL:  "https://accounts.spotify.com/authorize",
@@ -177,7 +175,7 @@ func GetArtist(c *gin.Context) {
 	//一旦はここでやる
 	//c.SetCookie("spotify-token", token.AccessToken, 1000*60*60*24*7, "/", "https://localhost:8080", false, false)
 	//c.SetCookie("spotify-token", "BQAQ8IXL2MkfLMrNWK0Bs-b_jRdVIVfFMZvTSk_eCifwXedDodKrxch5hCRAZQXDyWdCa1HQv7F9RZJc2mw", 1000*60*60*24*7, "/", "http://localhost:8080", false, false)
-	c.SetCookie("spotify-token", "BQDCQ75jmVWWFQoJWv2lC6iNFZAN1KCvT_3eA7IxUJ0CGf9I8dVyLp5ysUrX29lqJQ9PiwYIL2pkOarfISA", 1000*60*60*24*7, "/", "http://localhost:8080", false, false)
+	c.SetCookie("spotify-token", "BQBVguyVRUe0r7dFQbxOkfQqHx7JE-O2Nk-y0F1h6Iy8DMFEVsBU0VdZAcnGWAt6tHIWcs_EA-cPRYPixPs", 1000*60*60*24*7, "/", "http://localhost:8080", false, false)
 
 	//gin使う場合
 	cookie, _ := c.Cookie("spotify-token")
@@ -195,8 +193,6 @@ func GetArtist(c *gin.Context) {
 	//playlist, err := service.GetTracks(cookie, location)
 
 	//gin使う場合
-	//固定したIdでアーティスト取得
-	//artist, err := service.GetMusicArtistId(cookie)
 
 	//アーティスト検索
 	artists, err := service.SearchMusicArtists(cookie)
@@ -213,11 +209,39 @@ func GetArtist(c *gin.Context) {
 
 	//gin使う場合
 	c.JSON(http.StatusOK, artists)
-
-	//gin使わない場合
-	//v, err := json.Marshal(playlist)
-	//if err != nil {
-	//	println(string(v))
-	//}
-	//w.Write(v)
 }
+
+//アーティストの詳細をアーティストのIDでとるAPI（曲情報保存時にあらかじめ取っておく）
+
+//func GetTracks(c *gin.Context) {
+//	//一旦はここでやる)
+//	c.SetCookie("spotify-token", "BQBVguyVRUe0r7dFQbxOkfQqHx7JE-O2Nk-y0F1h6Iy8DMFEVsBU0VdZAcnGWAt6tHIWcs_EA-cPRYPixPs", 1000*60*60*24*7, "/", "http://localhost:8080", false, false)
+//
+//	//gin使う場合
+//	cookie, _ := c.Cookie("spotify-token")
+//
+//	if cookie == "" {
+//		//gin使わない場合
+//		c.AbortWithStatus(http.StatusUnauthorized)
+//		return
+//		//log.Println("cookieが空白")
+//	}
+//	log.Println("cookie:", cookie)
+//
+//	title := c.Query("title")
+//
+//	//トラック（曲）検索
+//	//tracks, err := service.GetTracks(cookie)
+//	tracks, err := service.GetTracks(cookie, title)
+//
+//	log.Println("tracks:", tracks)
+//
+//	if err != nil {
+//		c.AbortWithStatus(http.StatusInternalServerError)
+//		return
+//		log.Fatal("トラック取得失敗")
+//	}
+//
+//	//gin使う場合
+//	c.JSON(http.StatusOK, tracks)
+//}
